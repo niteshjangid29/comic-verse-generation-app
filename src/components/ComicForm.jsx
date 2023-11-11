@@ -113,6 +113,7 @@ const ComicForm = ({ onImageDataChange }) => {
             </div>
 
             <textarea
+              className="form-control"
               placeholder="Enter text for the comic panels"
               name=""
               value={inputText}

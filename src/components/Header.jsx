@@ -5,7 +5,7 @@ import Offcanvas from "react-bootstrap/Offcanvas";
 
 function Header() {
   return (
-    <Navbar key="md" expand="md" className="bg-body-tertiary mb-3">
+    <Navbar key="md" expand="md" className="bg-body-tertiary mb-3 w-100">
       <Container>
         <Navbar.Brand href="#" className="fw-bold">
           Comic-Verse
