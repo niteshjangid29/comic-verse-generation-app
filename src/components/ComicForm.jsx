@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "./ComicForm.css";
 import axios from "axios";
+import Button from "./Button";
+import Loader from "./Loader";
 
 const ComicForm = ({ onImageDataChange }) => {
   const initialData = Array.from({ length: 10 }, (_, index) => ({
@@ -33,7 +35,7 @@ const ComicForm = ({ onImageDataChange }) => {
       return update;
     });
 
-    console.log("text: ", data);
+    // console.log("text: ", data);
 
     const apiUrl =
       "https://xdwvg9no7pefghrn.us-east-1.aws.endpoints.huggingface.cloud";
@@ -62,7 +64,7 @@ const ComicForm = ({ onImageDataChange }) => {
             });
           };
           reader.readAsDataURL(response.data);
-          console.log("res", response);
+          // console.log("res", response);
         })
         .catch((error) => {
           console.error("Error:", error);
@@ -123,20 +125,22 @@ const ComicForm = ({ onImageDataChange }) => {
               onChange={(e) => setInputText(e.target.value)}
             />
 
-            <button type="submit" className="btn btn-primary mt-4">
-              Generate Comic
-            </button>
+            <Button type="submit" text="Generate Comic" className="mt-4" />
           </form>
         </div>
         <div className="col-md-4 generated-image">
           {loading ? (
-            <div>Please Wait while image is generating...</div>
+            <div className="loader-pos">
+              <Loader />
+            </div>
           ) : (
             <div>
               {generatedImage ? (
                 <img src={generatedImage} alt="panel" />
               ) : (
-                <p>Error</p>
+                <div className="default-img">
+                  <img src="./generate.svg" alt="generate" />
+                </div>
               )}
             </div>
           )}

@@ -1,9 +1,19 @@
+:root{
+  --primary-color: #212121;
+  --text-color: #666666;
+  /* --secondary-color: #0092ca; */
+  --secondary-color: #a7ece8;
+  --grey-color:#535353;
+  --bg-color: #2c2c2c;
+}
+
 .App {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   font-family: 'Roboto Slab', serif;
+  background: var(--primary-color);
+  min-height: 100vh;   
 }
 
 .comics{
@@ -15,6 +25,7 @@
   overflow: hidden;
   padding: 2rem;
   margin-bottom: 3rem;
+  margin-top: 2rem;
 }
 .comics .row{
   display: flex;
@@ -31,4 +42,20 @@
 .comics .col-md-6 img{
   width: 100%;
   border: 5px solid #000;
+}
+
+.empty-images{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  min-height: 10rem;
+}
+
+@media screen and (max-width: 576px){
+  .comics {
+      border-radius: 0;
+      padding: 1rem;
+      margin-bottom: 2rem;
+    }
 }

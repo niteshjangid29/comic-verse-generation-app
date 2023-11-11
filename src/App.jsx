@@ -3,6 +3,7 @@ import "./App.css";
 import ComicForm from "./components/ComicForm";
 import Header from "./components/Header";
 import jsPDF from "jspdf";
+import Button from "./components/Button";
 // import html2canvas from "html2canvas";
 
 function App() {
@@ -12,7 +13,7 @@ function App() {
     setImageData(data);
   };
 
-  const download = () => {
+  const download = async () => {
     const doc = new jsPDF({
       orientation: "square",
       unit: "mm",
@@ -20,7 +21,7 @@ function App() {
     });
 
     // Function to add images to the PDF in a 2x2 grid
-    const addImagesToPDF = (images) => {
+    const addImagesToPDF = async (images) => {
       for (let i = 0; i < images.length; i += 4) {
         doc.setFillColor("black"); // Light gray background
         doc.rect(
@@ -31,7 +32,7 @@ function App() {
           "F"
         );
         const pageImages = images.slice(i, i + 4);
-        addImagesToPage(pageImages);
+        await addImagesToPage(pageImages);
         if (i + 4 < images.length) {
           doc.addPage();
         }
@@ -68,20 +69,24 @@ function App() {
       <Header />
       <ComicForm onImageDataChange={handleImageDataChange} />
 
-      <button className="btn btn-primary" onClick={download}>
-        Download
-      </button>
+      <Button text="Download" clickfunction={download} />
       <div className="container comics" id="page-to-print">
         <div className="row">
-          {imageData.map((item) => {
-            return (
-              item.imageUrl && (
-                <div className="col-md-6" key={item.id}>
-                  <img src={item.imageUrl} alt={item.text} />
-                </div>
-              )
-            );
-          })}
+          {imageData[0].imageUrl === "" ? (
+            <div className="empty-images">
+              Comic Panel will be generated here
+            </div>
+          ) : (
+            imageData.map((item) => {
+              return (
+                item.imageUrl && (
+                  <div className="col-md-6" key={item.id}>
+                    <img src={item.imageUrl} alt={item.text} />
+                  </div>
+                )
+              );
+            })
+          )}
         </div>
       </div>
     </div>

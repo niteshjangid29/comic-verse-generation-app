@@ -1,9 +1,8 @@
 
 .comic-container{
-    /* border: 1px solid #000; */
     box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px 0px;
     padding:1.5rem 2rem;
-    background: #f0f0f0;
+    background: var(--bg-color);
     border-radius: 1.5rem;
     margin: 3rem auto;
 }
@@ -29,11 +28,14 @@
     width: 100%;
     border: 1px solid #000;
     cursor: pointer;
-    background: red;
+    background: #007bff;
+    color: #fff;
     padding: 0.5rem;
+    outline: none;
 }
 .comic-form .panel-toggle button:hover:not([disabled]) {
-    background: orange !important;
+    /* background: orange !important; */
+    border-color: #fff !important;
 }
 
 .comic-form #form-input{
@@ -56,20 +58,49 @@
     align-items: center;
     width: 25rem;
     height: 25rem;
-    background: #fff;
+    /* border: 1px solid #fff;  */
 }
 .generated-image > div img{
     width: 100%;
+    border: 1px solid #fff;
 }
 
+.default-img{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+.default-img img{
+    padding: 1.5rem;
+}
 .active {
-    background: violet !important;
+    background: orange !important;
+    border-color: #fff !important;
 }
 
 .disabled {
-    background: yellow !important;
+    background: #6c757d !important;
+}
+.disabled:hover{
+    cursor: not-allowed !important;
 }
 
 .completed {
-    background: green !important;
+    background: #28a745 !important;
+}
+
+.loader-pos{
+    position: relative;
+}
+
+
+@media screen and (max-width: 576px) {
+    .comic-container {
+        padding: 1rem;
+        border-radius: 0;
+        margin: 0 auto 2rem ;
+    }
+    .default-img img {
+        padding: 1rem;
+    }
 }
