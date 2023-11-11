@@ -72,7 +72,7 @@ function App() {
       <Button text="Download" clickfunction={download} />
       <div className="container comics" id="page-to-print">
         <div className="row">
-          {imageData[0].imageUrl === "" ? (
+          {imageData[0] && imageData[0].imageUrl === "" ? (
             <div className="empty-images">
               Comic Panel will be generated here
             </div>
