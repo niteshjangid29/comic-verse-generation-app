@@ -64,6 +64,7 @@ const ComicForm = ({ onImageDataChange }) => {
             });
           };
           reader.readAsDataURL(response.data);
+          setLoading(false);
           // console.log("res", response);
         })
         .catch((error) => {
@@ -109,10 +110,8 @@ const ComicForm = ({ onImageDataChange }) => {
         setMaxLimit(Math.max(maxLimit, curr + 1));
         setCurr(curr + 1);
       }
+      setInputText("");
     }
-
-    setInputText("");
-    setLoading(false);
     console.log(data);
   };
 
