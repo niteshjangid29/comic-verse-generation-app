@@ -46,7 +46,7 @@ const ComicForm = ({ onImageDataChange }) => {
         "Bearer VknySbLLTUjbxXAXCjyfaFIPwUTCeRXbFSOjwRiCxsxFyhbnGjSFalPKrpvvDAaPVzWEevPljilLVDBiTzfIbWFdxOkYJxnOPoHhkkVGzAknaOulWggusSFewzpqsNWM",
     };
 
-    const inputData = { inputs: data[curr].text };
+    const inputData = { inputs: inputText };
 
     if (inputText !== "") {
       await axios
