@@ -64,7 +64,6 @@ const ComicForm = ({ onImageDataChange }) => {
             });
           };
           reader.readAsDataURL(response.data);
-          setLoading(false);
           // console.log("res", response);
         })
         .catch((error) => {
@@ -112,6 +111,7 @@ const ComicForm = ({ onImageDataChange }) => {
       }
       setInputText("");
     }
+    setLoading(false);
     console.log(data);
   };
 
@@ -161,7 +161,7 @@ const ComicForm = ({ onImageDataChange }) => {
             <Button
               type="submit"
               text="Generate Comic"
-              disabled={loading || inputText === ""}
+              disabled={loading}
               className="mt-4"
             />
           </form>
