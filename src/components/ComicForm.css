@@ -91,6 +91,7 @@
 
 .loader-pos{
     position: relative;
+    border: 1px solid #fff !important;
 }
 
 

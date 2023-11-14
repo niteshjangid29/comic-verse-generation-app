@@ -46,7 +46,7 @@ const ComicForm = ({ onImageDataChange }) => {
         "Bearer VknySbLLTUjbxXAXCjyfaFIPwUTCeRXbFSOjwRiCxsxFyhbnGjSFalPKrpvvDAaPVzWEevPljilLVDBiTzfIbWFdxOkYJxnOPoHhkkVGzAknaOulWggusSFewzpqsNWM",
     };
 
-    const inputData = { inputs: data[curr].text };
+    const inputData = { inputs: inputText };
 
     if (inputText !== "") {
       await axios
@@ -64,22 +64,54 @@ const ComicForm = ({ onImageDataChange }) => {
             });
           };
           reader.readAsDataURL(response.data);
+          setLoading(false);
           // console.log("res", response);
         })
         .catch((error) => {
           console.error("Error:", error);
           // alert.error(error);
           // modal for feedback input+btn+Error
+          if (error.response) {
+            // The request was made and the server responded with a status code
+            console.error("Response Data:", error.response.data);
+            console.error("Response Status:", error.response.status);
+            console.error("Response Headers:", error.response.headers);
+
+            alert(
+              "An error occurred while generating the comic. Please try again.\n" +
+                "Response Data: " +
+                JSON.stringify(error.response.data, null, 2) +
+                "\n" +
+                "Response Status: " +
+                error.response.status +
+                "\n" +
+                "Response Headers: " +
+                JSON.stringify(error.response.headers, null, 2)
+            );
+          } else if (error.request) {
+            // The request was made but no response was received
+            console.error("Request Data:", error.request);
+            alert(
+              "An error occurred while generating the comic. Please try again.\nRequest Data: " +
+                JSON.stringify(error.request, null, 2)
+            );
+          } else {
+            // Something happened in setting up the request that triggered an Error
+            console.error("Error Message:", error.message);
+            alert(
+              "An error occurred while generating the comic. Please try again.",
+              error.message
+            );
+          }
+          setLoading(false);
         });
 
       if (curr < 9) {
         setMaxLimit(Math.max(maxLimit, curr + 1));
         setCurr(curr + 1);
       }
+      setInputText("");
     }
-
-    setInputText("");
-    setLoading(false);
     console.log(data);
   };
 
@@ -123,9 +155,15 @@ const ComicForm = ({ onImageDataChange }) => {
               cols="50"
               rows="6"
               onChange={(e) => setInputText(e.target.value)}
+              disabled={loading}
             />
 
-            <Button type="submit" text="Generate Comic" className="mt-4" />
+            <Button
+              type="submit"
+              text="Generate Comic"
+              disabled={loading || inputText === ""}
+              className="mt-4"
+            />
           </form>
         </div>
         <div className="col-md-4 generated-image">
